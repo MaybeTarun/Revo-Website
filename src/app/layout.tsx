@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import LenisWrapper from "./components/LenisWrapper";
 
 export const metadata: Metadata = {
   title: "revo",
@@ -16,7 +17,9 @@ export default function RootLayout({
       <body
         className="antialiased"
       >
-        {children}
+        <LenisWrapper>
+          {children}
+        </LenisWrapper>
       </body>
     </html>
   );

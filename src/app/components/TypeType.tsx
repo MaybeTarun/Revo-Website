@@ -6,7 +6,7 @@ export default function TypingEffect({
   typingSpeed = 100, 
   pauseTime = 2000,   
   deletingSpeed = 60, 
-  className = "text-3xl md:text-6xl font-semibold"
+  className = "text-2xl md:text-6xl font-semibold"
 }) {
   const [index, setIndex] = useState(0); 
   const [subIndex, setSubIndex] = useState(0); 
@@ -54,7 +54,7 @@ export default function TypingEffect({
   }
 
   return (
-    <span className={`text-black/70 ${className}`}>
+    <span className={`text-black/80 ${className}`}>
       {display}
     </span>
   );

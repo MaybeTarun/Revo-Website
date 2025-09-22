@@ -3,6 +3,7 @@
 import { Revo } from 'revoicons';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import StarGithubButton from '../components/StarGithubButton';
 
 export default function Home() {
   const pathname = usePathname();
@@ -16,13 +17,13 @@ export default function Home() {
   return (
     <div className="bg-white w-full min-h-screen flex flex-col">
       <div className="h-[8vh] w-full border-b border-black/30">
-        <div className="h-full w-full md:w-[75vw] mx-auto border-x border-black/30 flex justify-between items-center px-6">
-          <Link href="/">
+      <div className="h-full w-full md:w-[75vw] mx-auto border-x border-black/20 flex justify-between items-center px-4 md:px-6">
+          <Link href="/revoui">
             <div className='flex justify-center items-center gap-1 cursor-pointer'>
               <Revo size={24}/>
-              <span className='-mt-1 text-2xl font-normal'>revo</span>
+              <span className='text-2xl font-medium'>revoui</span>
             </div>
-          </Link>
+          </Link>          
 
           <div className='flex justify-center items-center gap-4'>
             {menuItems.map((item) => (
@@ -38,6 +39,7 @@ export default function Home() {
                 </span>
               </Link>
             ))}
+            <div className='hidden md:block ml-4'><StarGithubButton repo="MaybeTarun/revo" /></div>
           </div>
         </div>
       </div>
