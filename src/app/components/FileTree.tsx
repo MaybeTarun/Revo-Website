@@ -40,18 +40,19 @@ interface TreeNodeProps {
 const INDENT = 4;
 
 const TreeNode: React.FC<TreeNodeProps> = ({ element, level }) => {
-  const hasChildren = element.children && element.children.length > 0;
-  const [isExpanded, setIsExpanded] = useState(hasChildren ? true : false);
+  const isFolder = Array.isArray(element.children); // folder if children is defined
+  const hasChildren = isFolder && element.children!.length > 0;
+  const [isExpanded, setIsExpanded] = useState(isFolder ? true : false);
 
   return (
-    <div className={`flex flex-col`} style={{ marginLeft: level * INDENT }}>
+    <div className="flex flex-col" style={{ marginLeft: level * INDENT }}>
       <div
         className={`flex items-center gap-1 px-1 rounded-md transition-colors duration-200 hover:bg-[#f5f5f5] ${
-          hasChildren ? "cursor-pointer" : "cursor-default"
+          isFolder ? "cursor-pointer" : "cursor-default"
         }`}
-        onClick={() => hasChildren && setIsExpanded(!isExpanded)}
+        onClick={() => isFolder && setIsExpanded(!isExpanded)}
       >
-        {hasChildren ? (
+        {isFolder ? (
           isExpanded ? (
             <FolderOpen className="h-4 w-4" />
           ) : (
@@ -63,7 +64,7 @@ const TreeNode: React.FC<TreeNodeProps> = ({ element, level }) => {
         <span>{element.name}</span>
       </div>
 
-      {hasChildren && (
+      {isFolder && hasChildren && (
         <AnimatePresence initial={false}>
           {isExpanded && (
             <motion.div
