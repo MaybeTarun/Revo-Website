@@ -13,6 +13,7 @@ import { Tree, TreeViewElement } from './components/FileTree';
 import Image from 'next/image';
 import { motion, useInView } from 'framer-motion';
 import FallingSquares from './components/FallingSquare';
+import DotGrid from './components/DotGrid';
 
 const formatStars = (num: number): string => {
   if (num >= 1_000_000) return (num / 1_000_000).toFixed(1).replace(/\.0$/, "") + "M";
@@ -156,14 +157,28 @@ export default function Home() {
       </div>
 
       <div className="h-[50vh] md:h-[70vh] w-full md:w-[75vw] mx-auto border-x border-black/20 flex justify-center items-center relative overflow-hidden">
-      <motion.div
+
+      {/* <motion.div
         className="absolute inset-0 -z-0 bg-[linear-gradient(to_right,theme(colors.gray.100)_1px,transparent_1px),linear-gradient(to_bottom,theme(colors.gray.100)_1px,transparent_1px)] bg-[length:16px_16px]"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, ease: "easeOut" }}
-      />
+      /> */}
+      <div className='w-full h-full relative'>
+        <DotGrid
+          dotSize={5}
+          gap={15}
+          baseColor="#f5f5f5"
+          activeColor="#96A78D"
+          proximity={150}
+          shockRadius={250}
+          shockStrength={5}
+          resistance={750}
+          returnDuration={2}
+        />
+      </div>
 
-      <div className="flex flex-col items-center justify-center text-center relative z-10 space-y-4">
+      <div className="absolute flex flex-col items-center justify-center text-center z-10 space-y-4">
         <motion.h1
           className="text-black text-2xl md:text-6xl font-semibold leading-snug tracking-tighter"
           initial={{ y: 40, opacity: 0 }}
@@ -219,7 +234,7 @@ export default function Home() {
               animate={allInView ? { x: 0, y: 0, opacity: 1 } : { x: -100, y: -100, opacity: 0 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
             >
-              <div className="absolute right-0 top-[10vh] md:top-[5vh] w-[80%] h-[25vh] border border-black/20 border-r-0 rounded-l-md bg-[#f5f5f5]">
+              <div className="absolute right-0 top-[10vh] md:top-[5vh] w-[80%] h-[25vh] border border-black/20 border-r-0 rounded-l-md bg-[#353839]">
                 <Feature1 />
               </div>
               <div className="absolute top-4 left-4 md:top-auto md:bottom-4 md:left-8">
@@ -467,7 +482,7 @@ export default function Home() {
             <CommandBlock commands={["npm run dev"]} />
           </motion.div>
         </div>
-        <div className='w-1/3 hidden md:block'><FallingSquares/></div>
+        <div className='w-1/3 hidden md:block '><FallingSquares/></div>
       </div>
     </div>
 

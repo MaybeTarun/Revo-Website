@@ -35,7 +35,7 @@ const Feature1 = () => {
 
   return (
     <div
-      className="w-full h-full flex flex-col items-start justify-end pb-4 overflow-hidden rounded-l-md relative"
+      className="w-full h-full flex flex-col items-start justify-between pb-4 overflow-hidden rounded-l-md relative"
       onMouseEnter={() => {
         if (!hovering) {
           setHovering(true);
@@ -43,7 +43,14 @@ const Feature1 = () => {
         }
       }}
     >
-      <div className="absolute bottom-4 left-4 text-base md:text-lg font-semibold text-black">
+
+      <div className="w-full flex items-center gap-2 px-3 py-2 border-b border-gray-300">
+        <span className="w-3 h-3 rounded-full bg-red-500"></span>
+        <span className="w-3 h-3 rounded-full bg-yellow-400"></span>
+        <span className="w-3 h-3 rounded-full bg-green-500"></span>
+      </div>
+
+      <div className="absolute bottom-4 left-4 text-base md:text-lg font-semibold text-white">
         &gt;_
       </div>
       
@@ -55,7 +62,7 @@ const Feature1 = () => {
           exit={{ y: -20, opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.3, ease: "easeOut" }}
           className={`text-sm md:text-base font-mono ml-12 ${
-            step === messages.length - 1 ? "text-green-600 text-base md:text-lg" : "text-black"
+            step === messages.length - 1 ? "text-green-600" : "text-white"
           }`}
         >
           {messages[step]}

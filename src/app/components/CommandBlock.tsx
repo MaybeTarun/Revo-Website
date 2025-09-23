@@ -24,13 +24,21 @@ const CommandBlock: React.FC<CommandBlockProps> = ({ commands }) => {
       <div className="relative bg-transparent border border-black text-black font-mono text-sm rounded-md p-4 z-10">
 
         <button
-          onClick={handleCopy}
-          className="absolute top-2 right-2 text-gray-600 hover:text-black cursor-pointer hover:scale-105 transition-transform"
+          onClick={!copied ? handleCopy : undefined}
+          className={`absolute top-2 right-2 flex items-center transition-transform ${
+            copied
+              ? "text-black cursor-default"
+              : "text-gray-600 hover:text-black cursor-pointer hover:scale-105"
+          }`}
           aria-label="Copy commands"
+          disabled={copied}
         >
-          <Copy size={18} />
+          {copied ? (
+            <span className="text-xs font-medium">Copied!</span>
+          ) : (
+            <Copy size={18} />
+          )}
         </button>
-
 
         <div>
           {commands.map((cmd, i) => (
@@ -39,13 +47,6 @@ const CommandBlock: React.FC<CommandBlockProps> = ({ commands }) => {
             </div>
           ))}
         </div>
-
-        {/* Copied Toast */}
-        {copied && (
-          <span className="absolute bottom-2 right-3 text-xs text-green-600 font-medium">
-            Copied!
-          </span>
-        )}
       </div>
     </div>
   );

@@ -16,21 +16,46 @@ interface Shape {
 }
 
 const SHAPES: Block[][] = [
-  [{ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 2, y: 0 }, { x: 3, y: 0 }], 
-  [{ x: 0, y: 0 }, { x: 0, y: 1 }, { x: 0, y: 2 }, { x: 0, y: 3 }],
-  [{ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 0, y: 1 }, { x: 1, y: 1 }], 
-  [{ x: 1, y: 0 }, { x: 0, y: 1 }, { x: 1, y: 1 }, { x: 1, y: 2 }],
-  [{ x: 0, y: 0 }, { x: 0, y: 1 }, { x: 0, y: 2 }, { x: 1, y: 2 }], 
-  [{ x: 1, y: 0 }, { x: 1, y: 1 }, { x: 1, y: 2 }, { x: 0, y: 0 }],
+  // I
+  [{ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 2, y: 0 }, { x: 3, y: 0 }],
+
+  // O
+  [{ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 0, y: 1 }, { x: 1, y: 1 }],
+
+  // Z
   [{ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 1, y: 1 }, { x: 2, y: 1 }],
-  [{ x: 1, y: 0 }, { x: 1, y: 1 }, { x: 0, y: 1 }, { x: 0, y: 2 }],
+
+  // S
+  [{ x: 1, y: 0 }, { x: 2, y: 0 }, { x: 0, y: 1 }, { x: 1, y: 1 }],
+
+  // L
+  [{ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 2, y: 0 }, { x: 0, y: 1 }],
 ];
 
+
+
+function fillRowCells(
+  newGrid: number[][],
+  rows: number,
+  cols: number,
+  rowFromBottom: number,
+  startFromRight: number,
+  endFromRight: number
+) {
+  const row = rows - rowFromBottom;
+  const startCol = cols - startFromRight;
+  const endCol = cols - endFromRight;
+
+  if (row >= 0 && startCol >= 0 && endCol >= 0) {
+    for (let c = Math.min(startCol, endCol); c <= Math.max(startCol, endCol); c++) {
+      newGrid[row][c] = 1;
+    }
+  }
+}
 
 const FallingShapes: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [shapes, setShapes] = useState<Shape[]>([]);
-  const [nextId, setNextId] = useState(0);
   const [grid, setGrid] = useState<number[][]>([]);
   const [spawnAllowed, setSpawnAllowed] = useState(true);
 
@@ -47,73 +72,80 @@ const FallingShapes: React.FC = () => {
     const newGrid: number[][] = Array.from({ length: rows }, () =>
       Array(cols).fill(0)
     );
-
-    for (let r = rows - 10; r < rows; r++) {
-      newGrid[r] = Array(cols).fill(1);
-    }
-
-    if (rows - 11 >= 0) {
-      for (let c = cols - 15; c < cols; c++) {
-        newGrid[rows - 11][c] = 1;
-      }
-    }
-
-    if (rows - 12 >= 0) {
-      for (let c = cols - 17; c < cols; c++) {
-        newGrid[rows - 12][c] = 1;
-      }
-    }
-
-    if (rows - 13 >= 0) {
-      for (let c = cols - 13; c < cols; c++) {
-        newGrid[rows - 13][c] = 1;
-      }
-      newGrid[rows - 13][cols - 17] = 1;
-    }
-
-    if (rows - 14 >= 0) {
-      for (let c = cols - 13; c < cols; c++) {
-        newGrid[rows - 14][c] = 1;
-      }
-    }
-
-    if (rows - 15 >= 0) {
-      for (let c = cols - 16; c <= cols - 10; c++) {
-        newGrid[rows - 15][c] = 1;
-      }
-    }    
+    
+    fillRowCells(newGrid, rows, cols, 1, 20, 2);
+    fillRowCells(newGrid, rows, cols, 2, 20, 2);
+    fillRowCells(newGrid, rows, cols, 3, 20, 2);
+    fillRowCells(newGrid, rows, cols, 4, 20, 2);
+    fillRowCells(newGrid, rows, cols, 5, 20, 2);
+    fillRowCells(newGrid, rows, cols, 6, 20, 2);
+    fillRowCells(newGrid, rows, cols, 7, 20, 2);
+    fillRowCells(newGrid, rows, cols, 8, 20, 2);
+    fillRowCells(newGrid, rows, cols, 9, 20, 2);
+    fillRowCells(newGrid, rows, cols, 10, 20, 2);
+    fillRowCells(newGrid, rows, cols, 11, 15, 2);
+    fillRowCells(newGrid, rows, cols, 11, 20, 19);
+    fillRowCells(newGrid, rows, cols, 12, 17, 2);
+    fillRowCells(newGrid, rows, cols, 12, 20, 20);
+    fillRowCells(newGrid, rows, cols, 13, 13, 2);
+    fillRowCells(newGrid, rows, cols, 13, 17, 17);
+    fillRowCells(newGrid, rows, cols, 14, 14, 2);
+    fillRowCells(newGrid, rows, cols, 14, 18, 18);
+    fillRowCells(newGrid, rows, cols, 15, 2, 2);
+    fillRowCells(newGrid, rows, cols, 15, 16, 6);
+    fillRowCells(newGrid, rows, cols, 16, 4, 2);
+    fillRowCells(newGrid, rows, cols, 16, 6, 6);
+    fillRowCells(newGrid, rows, cols, 16, 14, 10);
+    fillRowCells(newGrid, rows, cols, 17, 5, 4);
+    fillRowCells(newGrid, rows, cols, 17, 9, 8);
+    fillRowCells(newGrid, rows, cols, 17, 13, 13);
+    fillRowCells(newGrid, rows, cols, 18, 8, 8);
+    fillRowCells(newGrid, rows, cols, 18, 2, 2);
+    fillRowCells(newGrid, rows, cols, 18, 5, 5);
+    fillRowCells(newGrid, rows, cols, 19, 2, 2);
+    fillRowCells(newGrid, rows, cols, 19, 4, 4);
+    fillRowCells(newGrid, rows, cols, 19, 7, 7);
+    fillRowCells(newGrid, rows, cols, 20, 3, 3);
+    fillRowCells(newGrid, rows, cols, 21, 3, 3);
 
     setGrid(newGrid);
   }, []);
 
   useEffect(() => {
     if (!spawnAllowed) return;
-
+  
     const interval = setInterval(() => {
       if (!containerRef.current) return;
       const cols = 20;
-
+  
       const blocks = SHAPES[Math.floor(Math.random() * SHAPES.length)];
       const shapeWidth = Math.max(...blocks.map((b) => b.x)) + 1;
       const startX = Math.floor(Math.random() * (cols - shapeWidth));
-
-      const blocked = blocks.some(
-        (b) => grid[b.y] && grid[b.y][startX + b.x] === 1
-      );
-
+  
+      let blocked = false;
+  
+      setGrid((prevGrid) => {
+        blocked = blocks.some(
+          (b) => prevGrid[b.y] && prevGrid[b.y][startX + b.x] === 1
+        );
+  
+        return prevGrid;
+      });
+  
       if (blocked) {
         setSpawnAllowed(false);
         clearInterval(interval);
         return;
       }
-
-      const newShape: Shape = { id: nextId, blocks, x: startX, y: 0 };
-      setNextId((id) => id + 1);
-      setShapes((prev) => [...prev, newShape]);
+  
+      setShapes((prev) => [
+        ...prev,
+        { id: Date.now(), blocks, x: startX, y: 0 },
+      ]);
     }, SPAWN_INTERVAL);
-
+  
     return () => clearInterval(interval);
-  }, [nextId, grid, spawnAllowed]);
+  }, [spawnAllowed]);   
 
   useEffect(() => {
     const interval = setInterval(() => {
