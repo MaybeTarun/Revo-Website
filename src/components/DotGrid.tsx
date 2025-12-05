@@ -86,8 +86,7 @@ const DotGrid: React.FC<DotGridProps> = ({
     if (typeof window === 'undefined' || !window.Path2D) return null;
 
     const p = new Path2D();
-    const half = dotSize / 2;
-    p.rect(-half, -half, dotSize, dotSize);
+    p.arc(0, 0, dotSize / 2, 0, Math.PI * 2);
     return p;
   }, [dotSize]);
 

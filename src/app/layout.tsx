@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import LenisWrapper from "./components/LenisWrapper";
+import LenisWrapper from "@/components/LenisWrapper";
 
 export const metadata: Metadata = {
   title: "revo",

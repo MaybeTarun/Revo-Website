@@ -1,10 +1,11 @@
 "use client"
 
-import { Revo } from 'revoicons';
+import { Linkedin, Instagram, Envelope, Github, Revo } from 'revoicons';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import StarGithubButton from '../components/StarGithubButton';
-
+import StarGithubButton from '@/components/StarGithubButton';
+import { motion } from 'framer-motion';
+import TriangleGrid from '@/components/TriangleGrid';
 export default function Home() {
   const pathname = usePathname();
 
@@ -16,16 +17,16 @@ export default function Home() {
 
   return (
     <div className="bg-white w-full min-h-screen flex flex-col">
-      <div className="h-[8vh] w-full border-b border-black/30">
-      <div className="h-full w-full md:w-[75vw] mx-auto border-x border-black/20 flex justify-between items-center px-4 md:px-6">
+      <div className="h-[8vh] w-full border-b border-black/20">
+        <div className="h-full w-full md:w-[75vw] mx-auto border-x border-black/20 flex justify-between items-center px-4 md:px-6">
           <Link href="/revoui">
             <div className='flex justify-center items-center gap-1 cursor-pointer'>
               <Revo size={24}/>
-              <span className='text-2xl font-medium'>revoui</span>
+              <span className='text-2xl font-medium satoshi md:-mt-1'>revoui</span>
             </div>
           </Link>          
 
-          <div className='flex justify-center items-center gap-4'>
+          <div className='flex justify-center items-center gap-4 satoshi -mb-1'>
             {menuItems.map((item) => (
               <Link key={item.href} href={item.href}>
                 <span
@@ -44,20 +45,119 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="h-[70vh] w-full md:w-[75vw] mx-auto border-x border-black/30 flex justify-center items-center relative overflow-hidden">
-        <div className="absolute inset-0 -z-0 bg-[linear-gradient(to_right,theme(colors.gray.100)_1px,transparent_1px),linear-gradient(to_bottom,theme(colors.gray.100)_1px,transparent_1px)] bg-[length:16px_16px]" />
-        <div className="flex flex-col items-center justify-center text-center relative z-10 space-y-4">
-          <h1 className="text-black text-3xl md:text-6xl font-semibold leading-none">
-            RevoUI
-          </h1>
-          <p className="text-black/60 text-sm md:text-base">
+      <div className="h-[50vh] md:h-[70vh] w-full md:w-[75vw] mx-auto border-x border-black/20 flex justify-center items-center relative overflow-hidden">
+        <div className='w-full h-full relative'>
+          <TriangleGrid
+            triangleSize={10}
+            gap={15}
+            baseColor="#f5f5f5"
+            activeColor="#96A78D"
+            proximity={150}
+            shockRadius={250}
+            shockStrength={5}
+            resistance={750}
+            returnDuration={2}
+          />
+        </div>
+
+        <div className="absolute flex flex-col items-center justify-center text-center z-10 space-y-4">
+          <motion.h1
+            className="text-black text-3xl md:text-6xl font-medium leading-snug satoshi"
+            initial={{ y: 40, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            Revo UI
+          </motion.h1>
+
+          <motion.h3
+            className="text-black/60 text-base md:text-lg"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+          >
             Coming Soon!
-          </p>
+          </motion.h3>
+
+          <motion.div
+            className="md:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            <StarGithubButton repo="MaybeTarun/revo" />
+          </motion.div>
         </div>
       </div>
 
       <div className="h-[30vh] w-full border-t border-black/30">
         <div className="h-full w-full md:w-[75vw] mx-auto border-x border-black/30" />
+      </div>
+
+      <div className="h-[8vh] w-full border-y border-black/20">
+        <div className="h-full w-full md:w-[75vw] mx-auto border-x border-black/20 flex justify-center items-center md:items-start px-4">
+          <div className="flex items-center gap-4 md:hidden">
+            <Link href="https://maybetarun.in/github" target="_blank" rel="noopener noreferrer" className='hover:scale-105 transition-transform duration-300'>
+              <Github size={24} color='#000000b3'/>
+            </Link>
+            <Link href="https://maybetarun.in/linkedin" target="_blank" rel="noopener noreferrer" className='hover:scale-105 transition-transform duration-300'>
+              <Linkedin size={24} color='#000000b3' />
+            </Link>
+            <Link href="https://maybetarun.in/twitter" target="_blank" rel="noopener noreferrer" className='hover:scale-105 transition-transform duration-300'>
+              <Instagram size={24} color='#000000b3' />
+            </Link>
+            <Link href="mailto:tarun234.tg@gmail.com" target="_blank" rel="noopener noreferrer" className='hover:scale-105 transition-transform duration-300'>
+              <Envelope size={24} color='#000000b3' />
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      <div className="h-[8vh] w-full border-b border-black/20">
+        <div className="h-full w-full md:w-[75vw] mx-auto border-x border-black/20 flex justify-between items-center px-4">
+          
+          <Link href="/revoui" className="flex justify-center items-center gap-1 cursor-pointer text-black/70 hover:scale-105 transition-transform duration-300">
+            <Revo size={24} color='#000000b3'/>
+            <span className="text-2xl font-medium satoshi md:-mt-1">revoui</span>
+          </Link>
+
+          <div className="md:flex items-center gap-4 hidden">
+            {[
+              { href: "https://maybetarun.in/github", Icon: Github },
+              { href: "https://maybetarun.in/linkedin", Icon: Linkedin },
+              { href: "https://maybetarun.in/twitter", Icon: Instagram },
+              { href: "mailto:tarun234.tg@gmail.com", Icon: Envelope },
+            ].map(({ href, Icon }, idx) => (
+              <Link
+                key={idx}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative group flex items-center justify-center"
+              >
+                <span className="absolute w-10 h-10 rounded-full bg-[#D9E9CF] scale-0 group-hover:scale-100 transition-transform duration-300" />
+                
+                <Icon
+                  size={24}
+                  color="#000000b3"
+                  className="relative z-10 group-hover:scale-110 transition-transform duration-300"
+                />
+              </Link>
+            ))}
+          </div>
+
+          <div className="text-base text-black/70 font-normal satoshi">
+            built by{" "}
+            <Link
+              href="https://maybetarun.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline underline-offset-4 hover:text-black"
+            >
+              this guy
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );

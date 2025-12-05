@@ -50,7 +50,7 @@ const Feature1 = () => {
         <span className="w-3 h-3 rounded-full bg-green-500"></span>
       </div>
 
-      <div className="absolute bottom-4 left-4 text-base md:text-lg font-semibold text-white">
+      <div className="absolute bottom-4 left-4 text-base md:text-lg font-semibold text-white satoshi">
         &gt;_
       </div>
       
